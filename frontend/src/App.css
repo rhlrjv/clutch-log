@@ -1,0 +1,881 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* App Layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.app-header p {
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.app-main {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Loading States */
+.app-loading,
+.service-tasks-loading,
+.service-records-loading,
+.todo-tasks-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error States */
+.error-banner,
+.error-message,
+.service-tasks-error,
+.service-records-error,
+.todo-tasks-error {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #d00;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-banner button,
+.error-message button {
+  background: none;
+  border: none;
+  color: #d00;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #667eea;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #5a6fd8;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #cbd5e0;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Navigation */
+.navigation {
+  background-color: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 2rem;
+}
+
+.nav-header {
+  margin-bottom: 1rem;
+}
+
+.selected-motorcycle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+}
+
+.motorcycle-icon {
+  font-size: 2rem;
+}
+
+.motorcycle-info {
+  flex: 1;
+}
+
+.motorcycle-name {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.motorcycle-details {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.motorcycle-mileage {
+  color: #4a5568;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.nav-items {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.nav-item:hover {
+  background-color: #f1f5f9;
+}
+
+.nav-item.active {
+  background-color: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+}
+
+/* No Motorcycle Selected */
+.no-motorcycle-selected {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.no-motorcycle-selected h2 {
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.no-motorcycle-selected p {
+  color: #718096;
+  margin-bottom: 1.5rem;
+}
+
+/* Garage Styles */
+.garage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.garage-header h2 {
+  color: #2d3748;
+}
+
+.add-motorcycle-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.add-motorcycle-form h3 {
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.motorcycles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty-garage {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.empty-garage h3 {
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.empty-garage p {
+  color: #718096;
+}
+
+.motorcycle-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.motorcycle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.motorcycle-card.selected {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.motorcycle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.motorcycle-header h3 {
+  color: #2d3748;
+  margin: 0;
+}
+
+.motorcycle-year {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.motorcycle-make-model {
+  color: #718096;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.motorcycle-stats .stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.motorcycle-stats .stat label {
+  color: #718096;
+  font-weight: 500;
+}
+
+.update-mileage-btn {
+  background: none;
+  border: 1px solid #e2e8f0;
+  color: #667eea;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 0.5rem;
+}
+
+.update-mileage-btn:hover {
+  background-color: #667eea;
+  color: white;
+}
+
+.vin {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+}
+
+.mileage-update-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.mileage-update-form form {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+}
+
+.mileage-update-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.mileage-update-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Service Tasks */
+.service-tasks-header {
+  margin-bottom: 2rem;
+}
+
+.service-tasks-header h2 {
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.service-tasks-header p {
+  color: #718096;
+}
+
+.task-summary {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.stat.due .stat-number { color: #e53e3e; }
+.stat.total .stat-number { color: #667eea; }
+.stat.completed .stat-number { color: #38a169; }
+.stat.open .stat-number { color: #d69e2e; }
+
+.stat-label {
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.task-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.task-filters button {
+  background: none;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-filters button:hover {
+  background-color: #f8fafc;
+}
+
+.task-filters button.active {
+  background-color: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.empty-tasks {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.empty-tasks h3 {
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.empty-tasks p {
+  color: #718096;
+}
+
+.service-tasks-list,
+.service-records-list,
+.todo-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.service-task-card,
+.service-record-card,
+.todo-task-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.service-task-card:hover,
+.service-record-card:hover,
+.todo-task-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-task-card.pending { border-left-color: #ffa500; }
+.service-task-card.overdue { border-left-color: #e53e3e; }
+.service-task-card.completed { border-left-color: #38a169; }
+
+.todo-task-card.open { border-left-color: #d69e2e; }
+.todo-task-card.in_progress { border-left-color: #3182ce; }
+.todo-task-card.completed { border-left-color: #38a169; }
+.todo-task-card.overdue { border-left-color: #e53e3e; }
+
+.task-header,
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.task-title {
+  flex: 1;
+}
+
+.task-title h3 {
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.task-type {
+  color: #718096;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.task-status-badge,
+.priority-badge,
+.status-badge,
+.part-tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.task-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.status-badge.open { background-color: #d69e2e; }
+.status-badge.in_progress { background-color: #3182ce; }
+.status-badge.completed { background-color: #38a169; }
+
+.task-description,
+.record-details {
+  color: #4a5568;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.task-intervals {
+  margin-bottom: 1.5rem;
+}
+
+.task-intervals h4 {
+  color: #2d3748;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.intervals {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.interval {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.interval.mileage {
+  background-color: #e6fffa;
+  color: #00695c;
+}
+
+.interval.time {
+  background-color: #fef5e7;
+  color: #c05621;
+}
+
+.last-service-info,
+.next-service-info {
+  margin-top: 1rem;
+}
+
+.last-service,
+.next-service {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.last-service span,
+.next-service span {
+  color: #4a5568;
+  font-size: 0.85rem;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.complete-task-btn {
+  background-color: #38a169;
+  color: white;
+}
+
+.complete-task-btn:hover:not(:disabled) {
+  background-color: #2f855a;
+}
+
+.complete-task-form p {
+  margin-bottom: 1rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Service Records */
+.service-records-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.service-records-header h2 {
+  color: #2d3748;
+}
+
+.record-date {
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.record-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.info-item label {
+  color: #718096;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.parts-used {
+  margin-top: 1rem;
+}
+
+.parts-used label {
+  color: #4a5568;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.parts-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.part-tag {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* Todo Tasks */
+.todo-tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.todo-tasks-header h2 {
+  color: #2d3748;
+}
+
+.task-metadata {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.metadata-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metadata-item label {
+  color: #718096;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metadata-item span {
+  color: #4a5568;
+  font-size: 0.85rem;
+}
+
+.metadata-item.overdue span {
+  color: #e53e3e;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 0.5rem;
+  }
+  
+  .navigation {
+    padding: 1rem;
+  }
+  
+  .nav-items {
+    flex-direction: column;
+  }
+  
+  .nav-item {
+    justify-content: flex-start;
+  }
+  
+  .garage-header,
+  .service-records-header,
+  .todo-tasks-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .motorcycles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .task-filters {
+    flex-wrap: wrap;
+  }
+  
+  .intervals,
+  .last-service,
+  .next-service {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .task-header,
+  .record-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .record-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .task-metadata {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .form-actions,
+  .task-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .form-actions button,
+  .task-actions button {
+    width: 100%;
+  }
+}
