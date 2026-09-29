@@ -102,13 +102,17 @@ const ServiceRecords: React.FC<ServiceRecordsProps> = ({ motorcycle }) => {
   return (
     <div className="service-records">
       <div className="service-records-header">
-        <h2>Service Records</h2>
+        <div className="page-heading">
+          <span className="eyebrow">Maintenance history</span>
+          <h2>Service Records</h2>
+          <p>A complete paper trail for {motorcycle.name}.</p>
+        </div>
         <button 
           className="btn-primary"
           onClick={() => setShowAddForm(true)}
           disabled={showAddForm}
         >
-          Add Service Record
+          <span aria-hidden="true">＋</span> Add Service Record
         </button>
       </div>
 

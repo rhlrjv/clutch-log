@@ -128,13 +128,17 @@ const TodoTasks: React.FC<TodoTasksProps> = ({ motorcycle }) => {
   return (
     <div className="todo-tasks">
       <div className="todo-tasks-header">
-        <h2>Todo Tasks</h2>
+        <div className="page-heading">
+          <span className="eyebrow">Workshop checklist</span>
+          <h2>Todo Tasks</h2>
+          <p>Keep the small jobs from becoming roadside problems.</p>
+        </div>
         <button 
           className="btn-primary"
           onClick={() => setShowAddForm(true)}
           disabled={showAddForm}
         >
-          Add Todo Task
+          <span aria-hidden="true">＋</span> Add Todo Task
         </button>
       </div>
 

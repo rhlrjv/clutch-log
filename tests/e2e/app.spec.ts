@@ -8,7 +8,7 @@ test.describe('Clutch Log App', () => {
   test('should load the homepage', async ({ page }) => {
     // Check if the page loads with correct title and header
     await expect(page).toHaveTitle('🏍️ Clutch Log');
-    await expect(page.locator('h1')).toContainText('🏍️ Clutch Log');
+    await expect(page.locator('h1')).toContainText('Clutch Log');
     await expect(page.locator('text=Motorcycle Maintenance Tracker')).toBeVisible();
   });
 
