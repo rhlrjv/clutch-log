@@ -133,27 +133,53 @@ function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>🏍️ Clutch Log</h1>
-        <p>Motorcycle Maintenance Tracker</p>
-      </header>
+      <aside className="app-sidebar">
+        <header className="app-header">
+          <div className="brand-mark" aria-hidden="true">
+            <span>CL</span>
+          </div>
+          <div className="brand-copy">
+            <span className="brand-kicker">Personal workshop</span>
+            <h1>Clutch Log</h1>
+            <p>Motorcycle Maintenance Tracker</p>
+          </div>
+        </header>
 
-      {error && (
-        <div className="error-banner">
-          <p>{error}</p>
-          <button onClick={() => setError(null)}>×</button>
+        <Navigation
+          selectedMotorcycle={selectedMotorcycle}
+          activeView={activeView}
+          onViewChange={setActiveView}
+        />
+
+        <div className="sidebar-footer">
+          <span className="sidebar-footer-mark" aria-hidden="true">↗</span>
+          <div>
+            <strong>Ride ready</strong>
+            <span>Keep every mile accounted for.</span>
+          </div>
         </div>
-      )}
+      </aside>
 
-      <Navigation
-        selectedMotorcycle={selectedMotorcycle}
-        activeView={activeView}
-        onViewChange={setActiveView}
-      />
+      <section className="app-workspace">
+        <div className="workspace-topbar">
+          <div>
+            <span className="workspace-label">Workshop overview</span>
+            <strong>{selectedMotorcycle ? selectedMotorcycle.name : 'Your garage'}</strong>
+          </div>
+          <span className="workspace-status"><i aria-hidden="true"></i> Ready to ride</span>
+        </div>
 
-      <main className="app-main">
-        {renderActiveView()}
-      </main>
+        {error && (
+          <div className="error-banner">
+            <p>{error}</p>
+            <button onClick={() => setError(null)} aria-label="Dismiss error">×</button>
+          </div>
+        )}
+
+        <main className="app-main">
+          {renderActiveView()}
+        </main>
+      </section>
     </div>
   );
 }

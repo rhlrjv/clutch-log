@@ -99,8 +99,11 @@ const ServiceTasks: React.FC<ServiceTasksProps> = ({ motorcycle }) => {
   return (
     <div className="service-tasks">
       <div className="service-tasks-header">
-        <h2>Service Tasks</h2>
-        <p>Track maintenance intervals for {motorcycle.name}</p>
+        <div className="page-heading">
+          <span className="eyebrow">Maintenance schedule</span>
+          <h2>Service Tasks</h2>
+          <p>Track maintenance intervals for {motorcycle.name}</p>
+        </div>
       </div>
 
       <div className="task-summary">

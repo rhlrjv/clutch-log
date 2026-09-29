@@ -157,9 +157,12 @@ jspm_packages/
 .nuxt
 dist
 
-# Gatsby files
+# Gatsby files (root-level output only; React's frontend/public is source)
 .cache/
 /public
+
+# Conductor workspace artifacts
+.context/
 
 # Storybook build outputs
 .out

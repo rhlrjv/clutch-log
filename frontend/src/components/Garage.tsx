@@ -114,13 +114,17 @@ const Garage: React.FC<GarageProps> = ({
   return (
     <div className="garage">
       <div className="garage-header">
-        <h2>My Garage</h2>
+        <div className="page-heading">
+          <span className="eyebrow">The stable</span>
+          <h2>My Garage</h2>
+          <p>{motorcycles.length === 0 ? 'Add your first machine and start its maintenance history.' : `${motorcycles.length} ${motorcycles.length === 1 ? 'machine' : 'machines'} ready for the road.`}</p>
+        </div>
         <button 
           className="btn-primary"
           onClick={() => setShowAddForm(true)}
           disabled={showAddForm}
         >
-          Add Motorcycle
+          <span aria-hidden="true">＋</span> Add Motorcycle
         </button>
       </div>
 
@@ -306,10 +310,24 @@ const MotorcycleCard: React.FC<MotorcycleCardProps> = ({
   return (
     <div 
       className={`motorcycle-card ${isSelected ? 'selected' : ''}`}
-      onClick={onSelect}
     >
+      <div className="motorcycle-card-accent">
+        <span aria-hidden="true">{motorcycle.make.slice(0, 2).toUpperCase()}</span>
+        <button
+          type="button"
+          className="motorcycle-select-control"
+          aria-label={`${isSelected ? 'Selected' : 'Select'} ${motorcycle.name}`}
+          aria-pressed={isSelected}
+          onClick={onSelect}
+        >
+          {isSelected ? 'Active' : 'Select'}
+        </button>
+      </div>
       <div className="motorcycle-header">
-        <h3>{motorcycle.name}</h3>
+        <div>
+          <span className="card-kicker">{motorcycle.make}</span>
+          <h3>{motorcycle.name}</h3>
+        </div>
         <span className="motorcycle-year">{motorcycle.year}</span>
       </div>
       
@@ -320,8 +338,8 @@ const MotorcycleCard: React.FC<MotorcycleCardProps> = ({
         
         <div className="motorcycle-stats">
           <div className="stat">
-            <label>Mileage:</label>
-            <span>{formatMileage(motorcycle.current_mileage)}</span>
+            <label>Odometer</label>
+            <span className="mileage-value">{formatMileage(motorcycle.current_mileage)}</span>
             <button 
               className="update-mileage-btn"
               onClick={(e) => {
@@ -329,7 +347,7 @@ const MotorcycleCard: React.FC<MotorcycleCardProps> = ({
                 setShowMileageUpdate(true);
               }}
             >
-              Update
+              Update <span aria-hidden="true">↗</span>
             </button>
           </div>
           
@@ -352,8 +370,9 @@ const MotorcycleCard: React.FC<MotorcycleCardProps> = ({
       {showMileageUpdate && (
         <div className="mileage-update-form" onClick={(e) => e.stopPropagation()}>
           <form onSubmit={handleMileageSubmit}>
-            <label>New Mileage:</label>
+            <label htmlFor={`mileage-${motorcycle.id}`}>New Mileage:</label>
             <input
+              id={`mileage-${motorcycle.id}`}
               type="number"
               value={newMileage}
               onChange={(e) => setNewMileage(parseInt(e.target.value) || 0)}
