@@ -34,70 +34,48 @@ clutchlog/
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.9+
 - Node.js 16+
-- npm or yarn
+- npm
+- Make
 
-### 1. Start the Backend
+Install the prerequisites, then start the entire app with one command from the
+repository root:
 
 ```bash
-cd backend
-
-# Create and activate virtual environment (first time only)
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies (first time only)
-pip install -r requirements-simple.txt
-
-# Start the API server
-python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+make run
 ```
 
-Backend will be available at: http://localhost:8000
+This installs missing backend and frontend dependencies, then starts both
+development servers. In a regular shell, the defaults are:
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8000
 - API docs: http://localhost:8000/docs
-- Health check: http://localhost:8000/health
 
-### 2. Start the Frontend
+To avoid collisions when running multiple git worktrees, override either port:
 
 ```bash
-cd frontend
-
-# Install dependencies (first time only)
-npm install
-
-# Start the development server
-npm start
+make run FRONTEND_PORT=3100 BACKEND_PORT=8100
 ```
 
-Frontend will be available at: http://localhost:3000
-
-### 3. Access the Application
-
-Open your browser to http://localhost:3000
-
-The app will show your garage where you can:
-1. **Add a motorcycle** using the "Add Motorcycle" button
-2. **Select predefined schedules** for Suzuki SV650 or Ducati Monster
-3. **View service tasks** that are automatically created based on your motorcycle's schedule
-4. **Navigate between sections** using the top navigation
+Conductor workspaces use their allocated `CONDUCTOR_PORT` automatically for
+the frontend and the next port for the backend, so plain `make run` is safe to
+use across parallel worktrees.
 
 ## Testing
 
 ### Backend Tests
 
 ```bash
-cd backend
-source venv/bin/activate
-
 # Run all backend tests
-pytest tests/
+backend/.venv/bin/python -m pytest backend/tests/
 
 # Run with verbose output
-pytest tests/ -v
+backend/.venv/bin/python -m pytest backend/tests/ -v
 
 # Run specific test file
-pytest tests/unit/test_domain.py
+backend/.venv/bin/python -m pytest backend/tests/unit/test_domain.py
 ```
 
 **Test Coverage**: 38 passing tests covering domain logic, services, and API endpoints.
@@ -189,10 +167,6 @@ npx playwright show-report
 - **Services**: API client and business logic
 - **Types**: TypeScript definitions
 - **Utils**: Helper functions and formatters
-
-## Known Issues
-
-⚠️ **API Proxy Configuration**: Frontend `/api/*` calls currently return HTML instead of being proxied to backend. Directly calling `http://localhost:8000/api/*` works correctly.
 
 ## Troubleshooting
 
